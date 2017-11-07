@@ -110,9 +110,10 @@ export default class ReactPlayer extends Component {
     const otherProps = omit(this.props, SUPPORTED_PROPS, DEPRECATED_CONFIG_PROPS)
     const activePlayer = this.renderActivePlayer(url)
     const preloadPlayers = renderPreloadPlayers(url, this.config)
+    const players = [ activePlayer, ...preloadPlayers ].sort((a, b) => a.key < b.key)
     return (
       <div ref={this.wrapperRef} style={{ ...style, width, height }} {...otherProps}>
-        {[ activePlayer, ...preloadPlayers ]}
+        {players}
       </div>
     )
   }
